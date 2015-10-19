@@ -27,7 +27,7 @@ public class BMI {
             height = (input.nextDouble()/100);
             if(height > 0 && height <= 3)
                break;
-            System.out.println("Invalid weight");
+            System.out.println("Invalid height");
             System.out.print("Enter your height in CM: ");
         }
         
