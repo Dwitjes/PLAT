@@ -20,7 +20,6 @@ public class BMI {
             System.out.println("Invalid weight");
             System.out.print("Enter your weight in KG: ");  
         }
-//Test commit elwin
         
         //Input Height
         System.out.print("Enter your height in CM: ");
@@ -31,6 +30,9 @@ public class BMI {
             System.out.println("Invalid weight");
             System.out.print("Enter your height in CM: ");
         }
+        
+        // Closing inut variable
+        input.close();
         
         //Berekening BMI
         bmi = weight/(height * height);      		
