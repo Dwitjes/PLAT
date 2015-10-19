@@ -33,7 +33,7 @@ public class BMI {
         
         //Berekening BMI
         bmi = weight/(height * height);      		
-        System.out.println("Your BMI is " + bmi);
+        System.out.println("Your BMI is " + Math.round(bmi));
         
         // Beoordeling
         if(bmi<18.5){
@@ -54,11 +54,11 @@ public class BMI {
         Maxstreefgewicht = (25*(height * height));
         
         if(bmi<18.5){
-        	System.out.println("Uw streefgewicht is " + Minstreefgewicht + " KG");
+        	System.out.println("Uw streefgewicht is " + Math.round(Minstreefgewicht) + " KG");
         	System.out.println("Om een BMI van 18,5 te halen moet u " + (Minstreefgewicht-weight) + " Kilo aankomen");
         }
         else if(bmi>=25){
-            System.out.println("Uw streefgewicht is " + Maxstreefgewicht + " KG");
+            System.out.println("Uw streefgewicht is " + Math.round(Maxstreefgewicht) + " KG");
             System.out.println("Om een BMI van 25 te halen moet u " + (weight-Maxstreefgewicht) + " Kilo afvallen");
         }	
     }
