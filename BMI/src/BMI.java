@@ -20,7 +20,7 @@ public class BMI {
             System.out.println("Invalid weight");
             System.out.print("Enter your weight in KG: ");  
         }
-
+//Test
         //Input Height
         System.out.print("Enter your height in CM: ");
         while(true) {
