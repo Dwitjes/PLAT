@@ -12,23 +12,23 @@ public class BMI {
         double Maxstreefgewicht;
         
         //Input weight
-        System.out.print("Enter your weight in KG: ");  
+        System.out.print("Wat is uw gewicht in KG: ");  
         while(true) {
         	weight = input.nextDouble();
             if(weight > 0 && weight <= 999)
                break;
-            System.out.println("Invalid weight");
-            System.out.print("Enter your weight in KG: ");  
+            System.out.println("Ongeldig gewicht");
+            System.out.print("Wat is uw gewicht in KG: ");  
         }
         
         //Input Height
-        System.out.print("Enter your height in CM: ");
+        System.out.print("Wat is uw lengte in CM: ");
         while(true) {
             height = (input.nextDouble()/100);
             if(height > 0 && height <= 3)
                break;
-            System.out.println("Invalid height");
-            System.out.print("Enter your height in CM: ");
+            System.out.println("Ongeldige lengte");
+            System.out.print("Wat is uw lengte in CM: ");
         }
         
         // Closing inut variable
@@ -36,20 +36,20 @@ public class BMI {
         
         //Berekening BMI
         bmi = weight/(height * height);      		
-        System.out.println("Your BMI is " + Math.round(bmi));
+        System.out.println("Uw BMI is " + Math.round(bmi));
         
         // Beoordeling
         if(bmi<18.5){
-        	System.out.println("Underweight: Under 18.5");
+        	System.out.println("Ondergewicht: Lager dan 18.5");
         }
         else if(bmi<25){
-        	System.out.println("Normal: 18.5-24.9 ");
+        	System.out.println("Normaal: 18.5-24.9 ");
         }
         else if(bmi<30){
-        	 System.out.println("Overweight: 25-29.9");
+        	 System.out.println("Overgewicht: 25-29.9");
         }
         else{
-        	System.out.println("Obese: 30 or over");
+        	System.out.println("Obese: 30 of hoger");
         }
         
         //Advies
@@ -58,11 +58,11 @@ public class BMI {
         
         if(bmi<18.5){
         	System.out.println("Uw streefgewicht is " + Math.round(Minstreefgewicht) + " KG");
-        	System.out.println("Om een BMI van 18,5 te halen moet u " + (Minstreefgewicht-weight) + " Kilo aankomen");
+        	System.out.println("Om een BMI van 18,5 te halen moet u " + Math.round(Minstreefgewicht-weight) + " Kilo aankomen");
         }
         else if(bmi>=25){
             System.out.println("Uw streefgewicht is " + Math.round(Maxstreefgewicht) + " KG");
-            System.out.println("Om een BMI van 25 te halen moet u " + (weight-Maxstreefgewicht) + " Kilo afvallen");
+            System.out.println("Om een BMI van 25 te halen moet u " + Math.round(weight-Maxstreefgewicht) + " Kilo afvallen");
         }	
     }
 }
