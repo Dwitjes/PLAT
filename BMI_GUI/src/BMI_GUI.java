@@ -3,6 +3,8 @@ import java.awt.EventQueue;
 import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class BMI_GUI {
 
@@ -52,6 +54,17 @@ public class BMI_GUI {
 		frame.getContentPane().add(lblWeight);
 		
 		textFieldWeight = new JTextField();
+		textFieldWeight.addKeyListener(new KeyAdapter() 
+		{
+			@Override
+			public void keyTyped(KeyEvent arg0) {
+				char c = arg0.getKeyChar();
+				if(!(Character.isDigit(c) || (c == KeyEvent.VK_BACK_SPACE) || c == KeyEvent.VK_DELETE )){
+
+					arg0.consume();
+				}
+			}
+		});
 		textFieldWeight.setBounds(176, 25, 86, 20);
 		frame.getContentPane().add(textFieldWeight);
 		textFieldWeight.setColumns(10);
@@ -61,6 +74,16 @@ public class BMI_GUI {
 		frame.getContentPane().add(lblHeight);
 		
 		textFieldHeight = new JTextField();
+		textFieldHeight.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if(!(Character.isDigit(c) || (c == KeyEvent.VK_BACK_SPACE) || c == KeyEvent.VK_DELETE )){
+
+					e.consume();
+				}
+			}
+		});
 		textFieldHeight.setColumns(10);
 		textFieldHeight.setBounds(176, 67, 86, 20);
 		frame.getContentPane().add(textFieldHeight);
