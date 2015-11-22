@@ -1,5 +1,4 @@
 import java.awt.EventQueue;
-
 import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -16,6 +15,8 @@ public class BMI_GUI {
 	private JLabel lblBmiAdvice;
 	private JTextArea textFieldBMI;
     private final static String newline = "\n";
+    private JTextField textFieldTaille;
+    private JLabel labelSexe;
 
 	/**
 	 * Launch the application.
@@ -45,12 +46,23 @@ public class BMI_GUI {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 516, 380);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
+		
+		labelSexe = new JLabel("Selecteer uw geslacht");
+		labelSexe.setBounds(23, 11, 160, 26);
+		frame.getContentPane().add(labelSexe);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Man", "Vrouw", "Transgender", "Onbekend"}));
+		comboBox.setBounds(230, 12, 103, 20);
+		frame.getContentPane().add(comboBox);
+
+		
 		JLabel lblWeight = new JLabel("Vul hier uw gewicht in KG");
-		lblWeight.setBounds(23, 22, 160, 26);
+		lblWeight.setBounds(23, 40, 160, 26);
 		frame.getContentPane().add(lblWeight);
 		
 		textFieldWeight = new JTextField();
@@ -65,12 +77,12 @@ public class BMI_GUI {
 				}
 			}
 		});
-		textFieldWeight.setBounds(176, 25, 86, 20);
+		textFieldWeight.setBounds(230, 43, 103, 20);
 		frame.getContentPane().add(textFieldWeight);
 		textFieldWeight.setColumns(10);
 		
 		lblHeight = new JLabel("Vul hier uw lengte in CM");
-		lblHeight.setBounds(23, 64, 160, 26);
+		lblHeight.setBounds(23, 77, 160, 26);
 		frame.getContentPane().add(lblHeight);
 		
 		textFieldHeight = new JTextField();
@@ -85,8 +97,27 @@ public class BMI_GUI {
 			}
 		});
 		textFieldHeight.setColumns(10);
-		textFieldHeight.setBounds(176, 67, 86, 20);
+		textFieldHeight.setBounds(230, 80, 103, 20);
 		frame.getContentPane().add(textFieldHeight);
+		
+		JLabel lblTaille = new JLabel("Vul hier uw taillelengte in CM");
+		lblTaille.setBounds(23, 114, 197, 26);
+		frame.getContentPane().add(lblTaille);
+		
+		textFieldTaille = new JTextField();
+		textFieldTaille.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if(!(Character.isDigit(c) || (c == KeyEvent.VK_BACK_SPACE) || c == KeyEvent.VK_DELETE )){
+
+					e.consume();
+				}
+			}
+		});	
+		textFieldTaille.setColumns(10);
+		textFieldTaille.setBounds(230, 117, 103, 20);
+		frame.getContentPane().add(textFieldTaille);
 		
 		btnCalculateBMI = new JButton("Bereken uw BMI!");
 		btnCalculateBMI.addActionListener(new ActionListener() {
@@ -164,19 +195,19 @@ public class BMI_GUI {
 			}
 		});
 		
-		btnCalculateBMI.setBounds(176, 112, 140, 23);
+		btnCalculateBMI.setBounds(176, 151, 140, 23);
 		frame.getContentPane().add(btnCalculateBMI);
 		
 		lblBmiAdvice = new JLabel("Uw BMI en advies:");
-		lblBmiAdvice.setBounds(128, 154, 134, 26);
+		lblBmiAdvice.setBounds(167, 174, 134, 26);
 		frame.getContentPane().add(lblBmiAdvice);
 		
 		textFieldBMI = new JTextArea();
 		textFieldBMI.setEditable(false);
 		textFieldBMI.setText("");
-		textFieldBMI.setBounds(23, 180, 401, 71);
+		textFieldBMI.setBounds(23, 211, 466, 120);
 		frame.getContentPane().add(textFieldBMI);
 		textFieldBMI.setColumns(10);
-	}
 
+	}
 }
