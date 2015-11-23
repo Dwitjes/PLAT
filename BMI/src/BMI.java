@@ -12,8 +12,14 @@ public class BMI {
         double height = 0;
         double waist = 0;
         double bmi;
+        double WeightMin = 0;
+        double WeightMax = 0;
+        double HeightMin = 0;
+        double HeightMax = 0;
+        double WaistMin = 0;
+        double WaistMax = 0;
         
-        Scanner input = new Scanner(System.in);
+        Scanner input = new Scanner(System.in);        
         
       //Input Geslacht
         System.out.print("Uw geslacht (M/V): ");  
@@ -21,7 +27,7 @@ public class BMI {
         	sex = input.next().toUpperCase();
         	
         	if(sex.equals("F")){
-        		System.out.println("Bedoeld u met uw invoer (" + sex + ") 'V' (Vrouw)?");
+        		System.out.println("Bedoelt u met uw invoer (" + sex + ") 'V' (Vrouw)?");
         		System.out.println("Toets 'J' om de waarde 'V' (Vrouw) te gebruiken");
         		System.out.println("Toets 'N' om nogmaals uw geslacht in te voeren");
         		jn = input.next().toUpperCase();
@@ -35,11 +41,44 @@ public class BMI {
             System.out.print("Uw geslacht (M/V): ");
         }
         
+        // Get Min Max
+        File MinMax = new File("Config/MinMax.csv");
+		
+	    try {
+
+	        Scanner sc = new Scanner(MinMax); 
+	        
+	        while (sc.hasNextLine()) {
+	        	String[] line = sc.nextLine().split(";");
+	        	
+	        	String InputClass = line[0];
+	        	double Min = Double.parseDouble(line[1]);
+	        	double Max = Double.parseDouble(line[2]);
+	        	
+	        	if(InputClass.equals("Weight")){
+	        		WeightMin = Min;
+	        		WeightMax = Max;
+	        	}
+	        	else if(InputClass.equals("Height")){
+	        		HeightMin = Min;
+	        		HeightMax = (Max/100);
+	        	}
+	        	else if(InputClass.equals("Waist")){
+	        		WaistMin = Min;
+	        		WaistMax = Max;
+	        	}
+            }
+            sc.close();       
+	    } 
+	    catch (FileNotFoundException e) {
+	        e.printStackTrace();
+	    }
+        
         //Input Gewicht
         System.out.print("Uw gewicht in KG: ");  
         while(true) {
         	weight = input.nextDouble();
-            if(weight > 0 && weight <= 999)
+            if(weight > WeightMin  && weight < WeightMax)
                break;
             System.out.println("Ongeldig gewicht");
             System.out.print("Uw gewicht in KG: ");  
@@ -49,7 +88,7 @@ public class BMI {
         System.out.print("Uw lengte in CM: ");
         while(true) {
             height = (input.nextDouble()/100);
-            if(height > 0 && height <= 3)
+            if(height > HeightMin && height < HeightMax)
                break;
             System.out.println("Ongeldige lengte");
             System.out.print("Uw lengte in CM: ");
@@ -59,7 +98,7 @@ public class BMI {
         System.out.print("Uw taille in CM: ");
         while(true) {
             waist = input.nextDouble();
-            if(waist >=50 && waist < 170)
+            if(waist > WaistMin && waist < WaistMax)
                break;
             System.out.println("Ongeldige taillelengte");
             System.out.print("Uw taille in CM: ");
@@ -88,14 +127,14 @@ public class BMI {
         System.out.println("Uw BMI is " + Math.round(bmi));
         
         // Beoordeling
-        File BMIAdvies = new File("Config/BMIAdvies.txt");
+        File BMIAdvies = new File("Config/BMIAdvies.csv");
 		
 	    try {
 
 	        Scanner sc = new Scanner(BMIAdvies); 
 	        
 	        while (sc.hasNextLine()) {
-	        	String[] line = sc.nextLine().split(" - ");
+	        	String[] line = sc.nextLine().split(";");
 
 	        	double BMIminTXT = Double.parseDouble(line[0]);
 	        	double BMImaxTXT = Double.parseDouble(line[1]);
@@ -114,14 +153,14 @@ public class BMI {
         System.out.println(" ");
         
         //Taille advies
-        File TaileAdvies = new File("Config/TailleAdvies.txt");
+        File TaileAdvies = new File("Config/TailleAdvies.csv");
 		
 	    try {
 
 	        Scanner sc = new Scanner(TaileAdvies); 
 	        
 	        while (sc.hasNextLine()) {
-	        	String[] line = sc.nextLine().split(" - ");
+	        	String[] line = sc.nextLine().split(";");
 
 	        	String sexTXT = line[0];
 	        	int tailleminTXT = Integer.parseInt(line[1]);
@@ -138,7 +177,8 @@ public class BMI {
 	    catch (FileNotFoundException e) {
 	        e.printStackTrace();
 	    }
-  
+	    System.out.println(" ");
+	    
         //Disclaimer
         File disclaimer = new File("Config/Disclaimer.txt");
 	    try {

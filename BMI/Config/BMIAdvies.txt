@@ -1,4 +1,0 @@
-0 - 18.5 - Ondergewicht: Lager dan 18.5
-18.5 - 25 - Normaal: 18.5-24.9
-25 - 30 - Overgewicht: 25-29.9
-30 - 100 - Obese: 30 of hoger
