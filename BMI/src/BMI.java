@@ -4,50 +4,49 @@ import java.util.Scanner;
 
 public class BMI {
 
-                static Scanner input = new Scanner(System.in); 
+
                 static String sex;
-                static String jn;
-                static double weight = 0;
-                static double height = 0;
-                static double waist = 0;
+                static double weight;
+                static double height;
+                static double waist;
                 static double bmi;
-                static double WeightMin = 0;
-                static double WeightMax = 0;
-                static double HeightMin = 0;
-                static double HeightMax = 0;
-                static double WaistMin = 0;
-                static double WaistMax = 0;
+                static double WeightMin;
+                static double WeightMax;
+                static double HeightMin;
+                static double HeightMax;
+                static double WaistMin;
+                static double WaistMax;
+                private static Scanner input;
     
     public static void main(String[] args){
                 inputgeslacht();
                 minmax();
-                inputgewicht();
-                inputhoogte();
-                inputtaille();
-                closeinput();
-                samenvatting();
-                bmicalc();
-                beoordeling();
-                tailleadvies();
+                inputgewicht(WeightMin, WeightMax);
+                inputhoogte(HeightMin, HeightMax);
+                inputtaille(WaistMin, WaistMax);
+                samenvatting(sex,weight,height,waist);
+                bmicalc(weight, height);
+                bmiadvies(bmi);
+                tailleadvies(sex,waist);
                 disclaimer();
     }
    
    
         //Input Geslacht
         public static void inputgeslacht(){
-                
-                 
+                input = new Scanner(System.in); 
                 System.out.print("Uw geslacht (M/V): ");  
                 while(true) {
                                sex = input.next().toUpperCase();
                 
                                if(sex.equals("F")){
+                                               
                                                System.out.println("Bedoelt u met uw invoer (" + sex + ") 'V' (Vrouw)?");
                                                System.out.println("Toets 'J' om de waarde 'V' (Vrouw) te gebruiken");
                                                System.out.println("Toets 'N' om nogmaals uw geslacht in te voeren");
-                                               jn = input.next().toUpperCase();
+                                               String jn = input.next().toUpperCase();
                                                if(jn.equals("J")){
-                                                               sex = "V";
+                                                              sex = "V";
                                                }
                                }
                                if(sex.equals("M")||sex.equals("V"))
@@ -60,43 +59,45 @@ public class BMI {
         
         // Get Min Max
         public static void minmax(){
-        File MinMax = new File("Config/MinMax.csv");
+                File MinMax = new File("Config/MinMax.csv");
                                
-                    try {
+                try {
 
-                        Scanner sc = new Scanner(MinMax); 
+                               Scanner sc = new Scanner(MinMax); 
                         
-                        while (sc.hasNextLine()) {
-                                String[] line = sc.nextLine().split(";");
+                               while (sc.hasNextLine()) {
+                                               String[] line = sc.nextLine().split(";");
                                 
-                                String InputClass = line[0];
-                                double Min = Double.parseDouble(line[1]);
-                                double Max = Double.parseDouble(line[2]);
+                                               String InputClass = line[0];
+                                               double Min = Double.parseDouble(line[1]);
+                                               double Max = Double.parseDouble(line[2]);
                                 
-                                if(InputClass.equals("Weight")){
-                                               WeightMin = Min;
-                                               WeightMax = Max;
-                                }
-                                else if(InputClass.equals("Height")){
-                                               HeightMin = Min;
-                                               HeightMax = (Max/100);
-                                }
-                                else if(InputClass.equals("Waist")){
-                                               WaistMin = Min;
-                                               WaistMax = Max;
-                                }
-            }
-            sc.close();       
-                    } 
-                    catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    }
+                                               if(InputClass.equals("Weight")){
+                                                               WeightMin = Min;
+                                                               WeightMax = Max;
+                                               }
+                                               else if(InputClass.equals("Height")){
+                                                               HeightMin = Min;
+                                                               HeightMax = (Max/100);
+                                               }
+                                               else if(InputClass.equals("Waist")){
+                                                               WaistMin = Min;
+                                                               WaistMax = Max;
+                                               }
+                               }
+                               sc.close();       
+                } 
+                catch (FileNotFoundException e) {
+                               e.printStackTrace();
+                }
         }
         
+        
         //Input Gewicht
-        public static void inputgewicht(){
-                System.out.print("Uw gewicht in KG: ");  
-                while(true) {
+        public static void inputgewicht(double WeightMin, double WeightMax){
+                input = new Scanner(System.in);
+                System.out.println("Uw gewicht in KG: ");  
+                while(true) {                                     
                                weight = input.nextDouble();
                                if(weight > WeightMin  && weight < WeightMax)
                                                break;
@@ -107,7 +108,8 @@ public class BMI {
         
         
         //Input Hoogte
-        public static void inputhoogte(){
+        public static void inputhoogte(double HeightMin, double HeightMax){
+                input = new Scanner(System.in); 
                 System.out.print("Uw lengte in CM: ");
                 while(true) {
                                height = (input.nextDouble()/100);
@@ -120,7 +122,8 @@ public class BMI {
         
         
         //Input Taille
-        public static void inputtaille(){
+        public static void inputtaille(double WaistMin, double WaistMax){
+                input = new Scanner(System.in); 
                 System.out.print("Uw taille in CM: ");
                 while(true) {
                                waist = input.nextDouble();
@@ -131,13 +134,8 @@ public class BMI {
                 }
         }
         
-        // Closing input variable
-        public static void closeinput(){
-                input.close();
-        }
-        
         //Samenvatting
-        public static void samenvatting(){
+        public static void samenvatting(String sex, double weight, double height, double waist){
                 System.out.println(" ");
                 System.out.println("U heeft opgegeven:");
                 if(sex.equals("M")){
@@ -154,13 +152,13 @@ public class BMI {
         }
         
         //Berekening BMI
-        public static void bmicalc(){
+        public static void bmicalc(double weight, double height){
                 bmi = weight/(height * height);                              
                 System.out.println("Uw BMI is " + Math.round(bmi));
         }
         
-        // Beoordeling
-        public static void beoordeling(){
+        // BMI Advies
+        public static void bmiadvies(double bmi){
                 File BMIAdvies = new File("Config/BMIAdvies.csv");
                                
                 try {
@@ -188,7 +186,7 @@ public class BMI {
         }
         
         //Taille advies
-        public static void tailleadvies(){
+        public static void tailleadvies(String sex, double waist){
         File TaileAdvies = new File("Config/TailleAdvies.csv");
                                
                     try {
