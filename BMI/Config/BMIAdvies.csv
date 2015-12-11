@@ -1,4 +1,4 @@
-0;18.5;Ondergewicht, lager dan 18.5
-18.5;25;Normaal, tussen 18.5 en 25
-25;30;Overgewicht, tussen 25 en 30
-30;100;Obese hoger dan 30
+0;18.5;Onderwicht betekent dat je lichter bent dan goed is voor je gezondheid, oftewel ondervoed.
+18.5;25;Gefeliciteerd, je hebt een gezond gewicht. Houden zo!
+25;30;Overgewicht betekent dat je zwaarder bent dan goed is voor je gezondheid.
+30;100;Obesitas betekent dat je veel zwaarder bent dan goed is voor je gezondheid.

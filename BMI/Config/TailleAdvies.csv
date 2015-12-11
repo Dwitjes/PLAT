@@ -1,6 +1,6 @@
-M;0;80;Advies voor range 0 tot 80
-M;80;120;Advies voor range 80 tot 120
-M;120;200;Advies voor range 120 tot 200
-V;0;80;Advies voor range 0 tot 80
-V;80;120;Advies voor range 80 tot 120
-V;120;200;Advies voor range 120 tot 200
+M;0;94;Gezond
+M;94;102;Verhoogd risico
+M;102;200;Sterk verhoogd risico
+V;0;80;Gezond
+V;80;88;Verhoogd risico
+V;88;200;Sterk verhoogd risico
